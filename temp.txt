@@ -1,0 +1,248 @@
+datetime
+::::::::::::::::::::::::::::
+
+
+
+{% if user.profile.Profile_status == "VERIFIED" %}
+<h1>Account Verified</h1>
+{% elif user.profile.Profile_status == "PENDING" %}
+<h1>Your Account is Pending for verification</h1>
+{% else %}
+<form action = "" method = "post"> 
+	{% csrf_token %} 
+	{{ form.as_table }}
+	<input type="submit" value=Submit"> 
+</form> 
+
+{% endif %}
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+<h1>{% trans "Sign Out" %}</h1>
+
+<p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit">{% trans 'Sign Out' %}</button>
+</form>
+
+
+:::::::::::::::::::::::::::::::::::::::::
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="item-1">
+    <a href="#"><img src={{car.Image_url}} alt="Image" class="img-fluid"></a>
+    <div class="item-1-contents">
+      <div class="text-center">
+        <h3><a href="#">{{car.Make_model}}</a></h3>
+        <div class="rating">
+          <span class="icon-star text-warning"></span>
+          <span class="icon-star text-warning"></span>
+          <span class="icon-star text-warning"></span>
+          <span class="icon-star text-warning"></span>
+          <span class="icon-star text-warning"></span>
+        </div>
+        <div class="rent-price"><span>${{car.Price}}/</span>day</div>
+      </div>
+      <ul class="specs">
+        <li>
+          <span>Reg No</span>
+          <span class="spec">{{car.Car_reg_no}}</span>
+        </li>
+        <li>
+          <span>Seats</span>
+          <span class="spec">{{car.Sitting_capacity}}</span>
+        </li>
+        <li>
+          <span>Transmission</span>
+          <span class="spec">{{car.Transmission}}</span>
+        </li>
+        <li>
+          <span>Minium age</span>
+          <span class="spec">18 years</span>
+        </li>
+      </ul>
+      <div class="d-flex action">
+      </div>
+
+      <form method="post" action="">{% csrf_token %}
+
+        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+      </form>
+
+
+
+    </div>
+  </div>
+</div>
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+<div class="row">
+
+            {{ my_form.as_table }}
+
+          </div>
+:::::::::::::::::::::::::::::::::
+<input type="text" name="start_date" class="form-control" required="" id="id_start_date" dp_config="{&quot;id&quot;: &quot;dp_1&quot;, &quot;picker_type&quot;: &quot;DATETIME&quot;, &quot;linked_to&quot;: null, &quot;options&quot;: {&quot;showClose&quot;: true, &quot;showClear&quot;: true, &quot;showTodayButton&quot;: true, &quot;collapse&quot;: false, &quot;minDate&quot;: &quot;04/17/2020 17:00&quot;, &quot;stepping&quot;: &quot;30&quot;, &quot;sideBySide&quot;: true, &quot;format&quot;: &quot;MM/DD/YYYY HH:mm&quot;}}" style="
+    height: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+">
+:::::::::::::::::::::::::::::::::::
+class BookingDetails(models.Model):
+    Car_reg_no        = models.ForeignKey(CarDetails, on_delete = models.DO_NOTHING)
+    Make_model        = models.CharField( max_length = 50, blank = True)
+    unique_booking_id = models.CharField(max_length=100 ,blank = True, null =True , unique = True)
+    User_id           = models.ForeignKey(User,on_delete = models.DO_NOTHING,blank = True, null = True)
+    License           = models.CharField( max_length = 20, blank = True)
+    Kms_initial       = models.IntegerField(blank = True, null = True)
+    Kms_later         = models.IntegerField(blank = True, null = True)
+    Kms_Driven        = models.IntegerField(blank = True, null = True)
+    Booked_for_kms    = models.IntegerField(blank = True, null = True)
+    #TODO : caluculate total price
+    Price             = models.IntegerField(blank = True,null = True)
+    Total_price       = models.IntegerField(blank = True,null = True)
+    Extra_fare        = models.IntegerField(blank = True,null = True)
+    Booking_date      = models.DateTimeField(auto_now_add = True)
+    Ride_start_date   = models.DateTimeField(blank = True,null = True)
+    Ride_end_date     = models.DateTimeField(blank = True,null = True)
+    Ride_started_at   = models.DateTimeField(blank = True,null = True)
+    Ride_ended_at     = models.DateTimeField(blank = True,null = True)
+    Final_price       = models.IntegerField(blank = True,null = True)
+    is_ride_completed = models.BooleanField(default = False)
+    Transaction_id    = models.CharField( max_length = 60, blank = True)
+    Bank_txn_id       = models.CharField( max_length = 60, blank = True)
+    Transaction_date  = models.CharField( max_length = 60, blank = True)
+    #TODO : is_ride started
+
+
+    def __str__(self):
+        return self.unique_booking_id
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+           <div class="form-group col-md-3">
+              <label for="cf-3">Journey Start Date</label>
+              <input type="text" id="cf-3" name ="start" placeholder="Your pickup date" class="form-control datepicker px-3" required>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="cf-3">Journey End Date</label>
+              <input type="text" id="cf-3" name ="end" placeholder="Your Drop-off date" class="form-control datepicker px-3" required>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::
+
+
+
+
+
+
+  
+  
+  <form method="POST" action="/accounts/password/reset/key/o-set-password/">
+    <input type="hidden" name="csrfmiddlewaretoken" value="kk1Y0BNYUwq29TrytJsEF7qN0Usa6n2w7A72BZwrG4Z9cj44zlsLWNeF20KCUfiJ">
+    <p><label for="id_password1">New Password:</label>
+    
+    
+     <input type="password" name="password1" placeholder="New Password" required="" id="id_password1"></p>
+
+
+<p><label for="id_password2">New Password (again):</label> 
+<input type="password" name="password2" placeholder="New Password (again)" required="" id="id_password2"></p>
+    
+    <input type="submit" name="action" value="change password">
+</form>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="alert alert-info">
+          <strong>{{ form.password1.errors }}</strong>
+        </div>
+        
+        <br />
+        <!-- class="inputbox required" -->
+       
+        
+
+
+
+        
+<form class="signup" id="signup_form" method="post" action="/accounts/signup/">
+  <input type="hidden" name="csrfmiddlewaretoken" value="ozy1J7ZDY97X88JJ04vUhz60qpczZW7llbYDnsvIRKS95SOWHQYdTPSFEShAdvdt">
+  <p>
+  <label for="id_email">E-mail:</label> 
+  <input type="email" name="email" placeholder="E-mail address" required="" id="id_email">
+  </p>
+
+<p>
+<label for="id_first_name">First Name:</label> 
+<input type="text" name="first_name" maxlength="30" required="" id="id_first_name"></p>
+<p><label for="id_last_name">Last Name:</label> <input type="text" name="first_name" maxlength="30" required="" id="id_last_name"></p>
+<p><label for="id_password1">Password:</label> <input type="password" name="password1" placeholder="Password" required="" id="id_password1"></p>
+<p><label for="id_password2">Password (again):</label> <input type="password" name="password2" placeholder="Password (again)" required="" id="id_password2"></p>
+  
+  <button type="submit">Sign Up »</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form class="login" method="POST" action="/accounts/login/">
+  <input type="hidden" name="csrfmiddlewaretoken" value="RiWLa2MPahiPdmRBd4hoH3G7hpfT8gWBcCSVpoB2yqWWKWAeeZhSWc5G8Ut0Tr3V">
+  <ul class="errorlist"><li>This field is required.</li></ul>
+<p>
+<label for="id_login">E-mail:</label>
+<input type="email" name="login" placeholder="E-mail address" autofocus="autofocus" required="" id="id_login">
+</p>
+
+
+<ul class="errorlist"><li>This field is required.</li></ul>
+<p><label for="id_password">Password:</label> <input type="password" name="password" placeholder="Password" required="" id="id_password"></p>
+<p><label for="id_remember">Remember Me:</label> <input type="checkbox" name="remember" id="id_remember"></p>
+  
+  <a class="button secondaryAction" href="/accounts/password/reset/">Forgot Password?</a>
+  <button class="primaryAction" type="submit">Sign In</button>
+</form>

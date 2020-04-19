@@ -1,0 +1,64 @@
+{% load static %}
+  <div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3">
+          <h3>Our Garage</h3>
+          <p class="mb-4">Have a walkthrough of our Garage</p>
+          <p>
+            <a href="#" class="btn btn-primary custom-prev">Previous</a>
+            <span class="mx-2">/</span>
+            <a href="#" class="btn btn-primary custom-next">Next</a>
+          </p>
+        </div>
+
+        <div class="col-lg-9">
+          <div class="nonloop-block-13 owl-carousel border-primary">
+            {% for car in cars %}
+            <div class="item-1 border border-secondary rounded">
+              <a href="#"><img src={{car.Image_url}} alt="Image" class="img-fluid" height="100px"></a>
+              <div class="item-1-contents">
+                <div class="text-center">
+                <h3>{{car.Make_model}}</h3>
+                
+                <div class="rent-price mt-2 mb-2"><span> <i class="fa fa-inr" aria-hidden="true"></i> {{car.Price}} /- </span>day</div>
+                </div>
+                <ul class="specs">
+                    <li>
+                        <span>Fare per Extra KM</span>
+                        <span class="spec">{{car.Fareperkm}}</span>
+                      </li>
+                  <li>
+                    <span>Seats</span>
+                    <span class="spec">{{car.Sitting_capacity}}</span>
+                  </li>
+                  <li>
+                    <span>Transmission</span>
+                    <span class="spec">{{car.Transmission}}</span>
+                  </li>
+                  <li>
+                    <span>Fuel</span>
+                    <span class="spec">{{car.Fuel}}</span>
+                  </li>
+                  <li>
+                    <span>Color</span>
+                    <span class="spec">{{car.color}}</span>
+                  </li>
+                 
+                </ul>
+                <div class="d-flex action">
+                  <a href="#" class="btn btn-primary">Rent Now</a>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>

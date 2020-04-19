@@ -1,0 +1,108 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="ftco-blocks-cover-1">
+  <div class=" overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}' );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;">
+
+  </div>
+</div>
+
+<div class="limiter " style="margin-top: -240px !important;">
+  <div class="container-login100">
+
+    <div class="wrap-login100"
+      style="background-image : url('{% static 'Login/images/carlogin2.jpg' %}'); background-repeat   : no-repeat; background-position : center;background-size     : inherit;">
+      
+ 
+      
+      <form class="login100-form validate-form signup" id="signup_form" method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        
+        <input type="hidden" name="{{ redirect_field_name }}" value="/profile/" />
+        
+
+        <span class="login100-form-title p-b-34 p-t-2 mb-2">
+          {% trans "Sign Up" %}
+        </span>
+       
+
+          {% if form.errors %}
+          {% for field in form %}
+          {% for error in field.errors %}
+          <div class="alert alert-info">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-info">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endif %}
+      
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Email">
+          <input class="input100" id="id_email" type="email" name="email" placeholder="email">
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter First Name">
+          <input class="input100" id="id_first_name" type="text" name="first_name" placeholder="First Name">
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Last Name">
+          <input class="input100" id="id_last_name" type="text" name="last_name" placeholder="Last Name">
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Password">
+          <input class="input100" id="id_password1" type="password" name="password1" placeholder="Password">
+          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Enter Password">
+          <input class="input100" id="id_password2" type="password" name="password2" placeholder="Enter Password Again">
+          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        </div>
+       
+
+        <br>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            {% trans "Sign Up" %}
+          </button>
+        </div>
+
+        <div class="text-center p-t-6 mt-2">
+          <a class="txt1 " href="#" style="font-size: 18px;">
+            Already have an account? Then please  
+          
+        </div>
+        <div class="container-login100-form-btn mt-2">
+        <div class="text-center p-t-6 login100-form-btn" >
+          <a href="{{ login_url }}" style="font-size: 16px;"> <strong>Sign in</strong> 
+          </a>
+        </div>
+      </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ my_form.media }}
+
+<div class="ftco-blocks-cover-1">
+  <div class=" overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;">
+
+  </div>
+</div>
+
+<div class="site-section pt-0 pb-0 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+
+        <form class="trip-form" method="post">
+          {% csrf_token %}
+          <div class="row align-items-center mb-4">
+            <div class="col-md-12 text-center">
+              <h3 class="m-0">Begin your trip here</h3>
+            </div>
+
+          </div>
+        
+          <br>
+          <div class="row">
+         
+          {% for field in my_form %}
+          <div class="form-group col-md-6 ">
+            {{ field.label_tag }} {{ field }}
+          </div>
+          {% endfor %}
+        </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{%include 'car_garage.html' %}
+
+
+
+
+<div class="container site-section mb-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-7 text-center mb-5">
+      <h2>Our Bussiness Model</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum
+        voluptates sed!</p>
+    </div>
+  </div>
+  <div class="how-it-works d-flex">
+    <div class="step">
+      <span class="number"><span>01</span></span>
+      <span class="caption">Enter Start Date &amp; End Date</span>
+    </div>
+    <div class="step">
+      <span class="number"><span>02</span></span>
+      <span class="caption">Select a Car</span>
+    </div>
+    <div class="step">
+      <span class="number"><span>03</span></span>
+      <span class="caption">Confirm Details</span>
+    </div>
+    <div class="step">
+      <span class="number"><span>04</span></span>
+      <span class="caption">Make Payment</span>
+    </div>
+    <div class="step">
+      <span class="number"><span>05</span></span>
+      <span class="caption">Pickup the car</span>
+    </div>
+    <div class="step">
+      <span class="number"><span>06</span></span>
+      <span class="caption">Enjoy the Ride</span>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="site-section bg-light" style="
+padding-top: 40px;
+padding-bottom: 40px;
+margin-bottom: 40px;
+">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-2">
+      <div class="col-7 text-center mb-2">
+        <h2>Customer Testimony</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo assumenda, dolorum necessitatibus eius earum
+          voluptates sed!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="testimonial-2">
+          <blockquote class="mb-4">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam,
+              nam, voluptatum"</p>
+          </blockquote>
+          <div class="d-flex v-card align-items-center">
+            <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid mr-3">
+            <span>Mike Fisher</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="testimonial-2">
+          <blockquote class="mb-4">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam,
+              nam, voluptatum"</p>
+          </blockquote>
+          <div class="d-flex v-card align-items-center">
+            <img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid mr-3">
+            <span>Jean Stanley</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="testimonial-2">
+          <blockquote class="mb-4">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, deserunt eveniet veniam. Ipsam,
+              nam, voluptatum"</p>
+          </blockquote>
+          <div class="d-flex v-card align-items-center">
+            <img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid mr-3">
+            <span>Katie Rose</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

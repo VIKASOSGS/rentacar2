@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--top image-->
+<div class="ftco-blocks-cover-1">
+  <div class=" overlay innerpage  mw-100" style="background-image: url('{% static 'images/hero_1.jpg' %}');
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+      height: 350px ">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% if response.RESPCODE == '01' %}
+
+<div class="container    mt-2 mb-4   ">
+  <div class="row justify-content-center align-self-center  ">
+
+    <div class="col-10 alert alert-success mt-2 mb-2  text-center" style="font-size: 16px;">
+      <i class="fa fa-check-circle" aria-hidden="true"></i><strong> Voila! Your Order is successful. We received your
+        Payment</strong></i>
+    </div>
+
+
+  </div>
+
+  <div class="row justify-content-center align-self-center ">
+
+
+    <div class="col-10 alert alert-success mt-2 mb-2  text-center" style="font-size: 16px;">
+      Your Booking Id : <strong>{{bd.unique_booking_id}}</strong>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center align-self-center ">
+
+    <div class="col-sm  justify-content-center align-self-center">
+      <img src={{car.Image_url}} alt="Image" class="img-fluid ">
+    </div>
+
+    <div class="col-9">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md alert alert-success mt-2 mb-2  " style="font-size: 14px;">
+            Ride Start Date & Time : <strong>{{bd.Ride_start_date}}</strong>
+          </div>
+          <div class="col-md alert alert-success mt-2 mb-2 ml-1  " style="font-size: 14px;">
+            Ride End Date & Time : <strong>{{bd.Ride_end_date}}</strong>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md mt-4">
+            <div class="alert alert-info mt-2 text-center">
+              <strong> Car Details </strong>
+            </div>
+
+            <ul class="specs ">
+              <li class="specs border-bottom mt-2">
+                <span>Reg No</span>
+                <span class="spec float-right "> {{car.Car_reg_no}} </span>
+              </li>
+              <li class="specs border-bottom mt-2">
+                <span>Make Model</span>
+                <span class="spec float-right "> {{car.Make_model}} </span>
+              </li>
+              <li class="specs border-bottom mt-2">
+                <span>Seats</span>
+                <span class="spec float-right">{{car.Sitting_capacity}}</span>
+              </li>
+              <li class="specs border-bottom mt-2">
+                <span>Transmission</span>
+                <span class="spec float-right">{{car.Transmission}}</span>
+              </li>
+              <li class="specs border-bottom mt-2">
+                <span>Fuel</span>
+                <span class="spec float-right">{{car.Fuel}}</span>
+              </li>
+
+            
+
+
+            </ul>
+
+          </div>
+
+
+          <div class="col-sm mt-4">
+            <div class="alert alert-info mt-2 text-center">
+              <strong> Payment Details </strong>
+            </div>
+
+            <ul class="specs ">
+              <li class="specs border-bottom mt-2">
+                <span>Total Fare</span>
+                <span class="spec float-right "> {{response.TXNAMOUNT}} <i class="fa fa-inr" aria-hidden="true"></i>
+                </span>
+
+              </li>
+              <li class="specs border-bottom mt-2">
+                <span> Txn Id </span>
+                <span class="spec float-right"> {{response.TXNID}}</span>
+              </li>
+              <li class="specs border-bottom mt-2 mb-5">
+                <span>Booking Date</span>
+                <span class="spec float-right"> {{response.TXNDATE}} </span>
+              </li>
+              
+
+            </ul>
+
+
+
+          </div>
+
+        </div>
+
+        <div class="row  mt-1">
+
+          <div class="col-md  mt-0  mb-1" style="">
+            <a class="btn btn-primary float-right" href=" {% url 'core:bookings'  %}" role="button">My Bookings</a>
+          </div>
+          <div class="col-md  mt-0 mb-1  ml-1 " style="">
+            <a class="btn btn-primary float-right" href=" {% url 'core:homepage'  %}" role=" button">Go to HomePage</a>
+          </div>
+
+      </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+{% else %}
+<div class="container">
+
+
+  <div class="row justify-content-center align-self-center  ">
+    <div class="col-10 alert alert-danger mt-2 mb-2  text-center" style="font-size: 16px;">
+      <strong>OH No !! . Sorry We could not book a car because of some technical glitch. Please try Booking again
+        .</strong>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center align-self-center  ">
+    <div class="col-10 alert alert-danger mt-2 mb-2  text-center" style="font-size: 16px;">
+      <strong> Any amount debited from your Wallet or Bank will be refunded back to you in 10 minutes.... </strong>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center align-self-center  ">
+    <div class="col-10 alert alert-danger mt-2 mb-2  text-center" style="font-size: 16px;">
+      <strong> Feel Free to call us at : <a href="tel:+919652786875">+91 9652786875</a> </strong>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center align-self-center  ">
+    <div class="col-10 alert alert-danger mt-2 mb-2  text-center" style="font-size: 16px;">
+      <strong> Your Reference Id : {{response.ORDERID}} </strong>
+    </div>
+  </div>
+
+</div>
+{% endif%}
+
+
+
+
+{% endblock content %}

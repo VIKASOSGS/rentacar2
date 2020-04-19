@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include "hero_4.html" %}
+
+
+
+<div class="site-section bg-light" style=" padding-top: 30px; ">
+  <div class="container">
+
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-sm alert alert-success m-2">
+          Ride Start Date & Time :  <strong>{{s_date}}</strong>  
+        </div>
+        <div class="col-sm alert alert-success m-2">
+          Ride End Date & Time : <strong>{{e_date}}</strong> 
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+
+      {% for car in cars %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="item-1 border border-secondary rounded"  style="background-color: white;">
+          <a href="#"><img src={{car.Image_url}} alt="Image" class="img-fluid" style="background-color: white;"></a>
+          <div class="item-1-contents">
+            <div class="text-center">
+              <h3>{{car.Make_model}}</h3>
+
+              <div class="rent-price mt-2 mb-2"><span><i class="fa fa-inr" aria-hidden="true"></i> {{car.Price}}/</span>day</div>
+            </div>
+            <ul class="specs">
+              <li>
+                <span>Reg No</span>
+                <span class="spec">{{car.Car_reg_no}}</span>
+              </li>
+              <li>
+                <span>Fare per Extra KM</span>
+                <span class="spec">{{car.Fareperkm}}</span>
+              </li>
+              
+              <li>
+                <span>Fare per Extra Hour</span>
+                <span class="spec">{{car.Fareperhour}}</span>
+              </li>
+              <li>
+                <span>Seats</span>
+                <span class="spec">{{car.Sitting_capacity}}</span>
+              </li>
+              <li>
+                <span>Transmission</span>
+                <span class="spec">{{car.Transmission}}</span>
+              </li>
+              <li>
+                <span>Fuel</span>
+                <span class="spec">{{car.Fuel}}</span>
+              </li>
+            </ul>
+            <div class="d-flex action">
+              <a href="{% url 'core:book' car.pk %}" class="btn btn-primary">Rent Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="row justify-content-center align-self-center  ">
+
+        <div class="col-8 alert alert-light text-center" style="font-size: 16px;">
+        Sorry! No cars are available for the dates you have selected. <hr> Please try booking on other dates. <hr> For any queries feel free to contact us at :<a href="tel:+919652786875">+91 9652786875</a> 
+        </div>
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% include 'top_staticfiles.html' %}
+
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  {% include 'navbar.html' %}
+
+ {% block content %}
+
+ {% endblock content %}
+
+ {% block extra_body %}
+  {% endblock %}
+
+
+  {% include 'footer.html' %}
+
+
+  </body>
+    {% include 'bottom_staticfiles.html' %}
+</html>

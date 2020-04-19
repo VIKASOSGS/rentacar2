@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include "hero_4.html" %}.
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+
+
+<div class="limiter " style="margin-top: -280px !important;">
+	<div class="container-login100">
+
+		<div class="wrap-login100"
+			style="background-image : url('{% static 'Login/images/carlogin2.jpg' %}'); background-repeat   : no-repeat; background-position : center; background-size :inherit; ;">
+
+			<span class="login100-form-title p-b-34 p-t-2 mb-2">
+				PROFILE PAGE
+			</span>
+
+
+			{% if user.profile.Profile_status == "VERIFIED" %}
+			<div class="alert alert-success text-center " style="font-size: 18px;">
+				<strong> You account has been successfully verified. <br> <hr>   You can now rent our cars and enjoy hassle free rides.  <br> <hr>  We can also show the user details here according to Client Requirements </strong> 
+				<a class="btn btn-success " href=" {% url 'core:homepage'  %}" role="button">Take me to Homepage</a>
+			</div>
+
+			{% elif user.profile.Profile_status == "PENDING" %}
+			<div class="alert alert-success text-center" style="font-size: 18px;">
+				   <h4 style="color:red;"><strong> PENDING !!! </strong> </h4>      
+				<strong> We had received your details successfully and we are in the process of verifying your details. <br> <hr> To get you account verified instantly feel free to call us at   <a href="tel:+919652786875">+91 9652786875</a>  <br> <hr> You can start renting our cars once your profile is verified by us. </strong> 
+				<strong> <hr> Still you can have a walkthrough of our garage. </strong> 
+				<br> <br>
+				We can also have an option to edit the uploaded details by the user.
+				<br> <br>
+				<a class="btn btn-success " href=" {% url 'core:homepage'  %}" role="button">Take me to Hompage</a>
+
+			</div>
+			{% else %}
+
+
+			<div class="alert alert-danger text-center" style="font-size: 18px;">
+				<strong>  We can also add an option to upload the Front and Back side images of user so that the Car Rentals owner can see the images and verify them. </strong> 
+
+			</div>
+
+			<form class="login100-form validate-form " method="post" action="">
+				{% csrf_token %}
+
+				{% if form.errors %}
+				{% for field in form %}
+				{% for error in field.errors %}
+				<div class="alert alert-info">
+					<strong>{{ error|escape }}</strong>
+				</div>
+				{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+				<div class="alert alert-info">
+					<strong>{{ error|escape }}</strong>
+				</div>
+				{% endfor %}
+				{% endif %}
+
+
+
+				<!--{{ form.as_table }}-->
+
+
+				{% for field in form %}
+
+				<div class="form-group">
+					<label for="exampleInputEmail1" style="color: white; font-size: 18px;">{{ field.label_tag }}</label>
+
+					{{field}} 
+				</div>
+				{% endfor %}
+
+
+				<div class="container-login100-form-btn mt-4">
+					<button class="login100-form-btn" type="submit">
+						Confirm
+					</button>
+				</div>
+				<br>
+			</form>
+			{% endif %}
+
+
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

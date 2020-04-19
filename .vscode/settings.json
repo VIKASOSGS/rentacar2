@@ -1,0 +1,6 @@
+{
+    "python.linting.enabled": false,
+    "explorer.openEditors.visible": 6,
+    "terminal.explorerKind": "external",
+    "editor.smoothScrolling": true
+}

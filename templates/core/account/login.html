@@ -1,0 +1,113 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+
+<div class="ftco-blocks-cover-1">
+  <div class=" overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}' );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;">
+
+  </div>
+</div>
+
+<div class="limiter " style="margin-top: -240px !important;">
+  <div class="container-login100">
+
+    <div class="wrap-login100"
+      style="background-image : url('{% static 'Login/images/carlogin2.jpg' %}'); background-repeat   : no-repeat; background-position : center;background-size     : inherit;">
+      <form class="login100-form validate-form login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+
+        <span class="login100-form-title p-b-34 p-t-2 mb-2">
+          {% trans "Sign In" %}
+        </span>
+
+          {% if form.errors %}
+          {% for field in form %}
+          {% for error in field.errors %}
+          <div class="alert alert-info">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-info">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+          {% endif %}
+      
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Email">
+          <input class="input100" id="id_login" type="email" name="login" placeholder="Email">
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Password">
+          <input class="input100" id="id_password" type="password" name="password" placeholder="Password">
+          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        </div>
+
+        <div class="contact100-form-checkbox">
+          <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+          <label class="label-checkbox100" for="ckb1">
+            Remember me
+          </label>
+        </div>
+
+        <div class=" p-t-0">
+          <a class="txt1" href="{% url 'account_reset_password' %}">
+            {% trans "Forgot Password?" %}
+          </a>
+
+
+          <br><br>
+          {% get_providers as socialaccount_providers %}
+
+          {% if socialaccount_providers %}
+          <p>{% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+          <div class="socialaccount_ballot">
+            <ul class="socialaccount_providers">
+              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </ul>
+            <div class="login-or">{% trans 'or' %}</div>
+          </div>
+          {% include "socialaccount/snippets/login_extra.html" %}
+          {% else %}
+          <p>{% blocktrans %}
+            <a class="txt1" href="{{ signup_url }}"> <em>Create New Account</em> </a> {% endblocktrans %}</p>
+          {% endif %}
+        </div>
+
+        <br>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            {% trans "Sign In" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
